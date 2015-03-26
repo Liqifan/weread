@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.weread.MainActivity" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_action_settings"
+        android:showAsAction="always"
+        android:title="@string/action_settings"/>
+    
+    <item  
+        android:id="@+id/action_comment"   
+        android:showAsAction="always" 
+        android:icon="@drawable/ic_action_edit" 
+        android:title="@string/action_comment"/>  
+        
+    <item  
+        android:id="@+id/action_findlocation"  
+        android:showAsAction="always"  
+        android:icon="@drawable/ic_action_map"
+        android:title="@string/action_findlocation"/>  
+    <item  
+        android:id="@+id/action_login"  
+        android:showAsAction="always"  
+        android:icon="@drawable/ic_action_accounts"
+        android:title="@string/action_login"/>  
+
+</menu>
