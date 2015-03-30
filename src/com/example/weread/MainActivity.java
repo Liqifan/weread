@@ -11,7 +11,6 @@ import org.json.JSONObject;
 // hello , this is a message from fan
 
 
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -20,7 +19,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.IntentFilter.MalformedMimeTypeException;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -315,8 +313,6 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		SharedPreferences sharedPref = this.getSharedPreferences("userinfo", Context.MODE_PRIVATE);
-		String UserName = sharedPref.getString("UserName", "");
 		switch (item.getItemId()) {
         case R.id.action_comment:
         	Intent CmtIntent = new Intent(mContext, ViewComment.class);
@@ -329,13 +325,8 @@ public class MainActivity extends Activity {
             return true;
         case R.id.action_login:
             // login page
-        	if(UserName.equals("")){
-        	    Intent LoginIntent = new Intent(mContext, LoginActivity.class);
-			    startActivity(LoginIntent);
-        	}else{
-        		Intent LoginIntent = new Intent(mContext, LoginSuccessful.class);
-			    startActivity(LoginIntent);
-        	}
+        	Intent LoginIntent = new Intent(mContext, LoginActivity.class);
+			startActivity(LoginIntent);
             return true;
         case R.id.action_settings:
             // settings

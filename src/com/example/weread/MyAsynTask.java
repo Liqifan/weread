@@ -36,7 +36,7 @@ public class MyAsynTask extends AsyncTask<String, Void, JSONObject> {
 		String getResult = "";
 		if (Params[0] == "http") {
 			try {
-				String urls = "http://" + SERVER_NAME ;
+				String urls = "http://" + SERVER_NAME + "/?";
 				urls = urls + Params[1]+ Params[2];
 				HttpClient http_client = new DefaultHttpClient();
 				HttpGet request = new HttpGet(urls);

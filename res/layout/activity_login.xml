@@ -15,9 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="User ID"
+        android:hint="登入名稱"
         android:inputType="textPersonName" >
 
         <requestFocus />
@@ -28,36 +27,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/linearLayout1"
-        android:layout_marginTop="10dp"
         android:layout_below="@+id/linearLayout1"
         android:ems="10"
-        android:hint="Password"
+        android:hint="密碼"
         android:inputType="textPassword" />
 
-    <ImageButton
+    <Button
         android:id="@+id/buttonsignin"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:layout_gravity="center"
-        android:src="@drawable/bt_login" />"
+        android:text="登入" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
-        android:text="Do not have an account?" />
+        android:text="尚未有帳號?" />
 
-    <ImageButton
-        android:layout_marginTop="10dp"
-        android:id="@+id/register"
-        android:background="@color/white"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/buttonregist"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/bt_register" />
+        android:text="免費申請帳號!" />
 
 </LinearLayout>

@@ -9,10 +9,8 @@ import android.app.Activity;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,7 +18,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity {
@@ -32,74 +29,55 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		
-		mContext = this;
 
-		final EditText loginNameEditText = (EditText) findViewById(R.id.editloginname);
-		final EditText loginPasswordEditText = (EditText) findViewById(R.id.editpassword);
-		Intent intent = getIntent();
-		Bundle loginInfo = intent.getBundleExtra("loginInfo");
-		if(loginInfo!=null){		
-		Log.d("login", loginInfo.getString("UserID"));
-		loginNameEditText.setText(loginInfo.getString("UserID"));
-		loginPasswordEditText.setText(loginInfo.getString("Password"));
-		}
-		
-		ImageButton buttonsignin = (ImageButton) findViewById(R.id.buttonsignin);
-		ImageButton register = (ImageButton) findViewById(R.id.register);
-		final SharedPreferences sharedPref = this.getSharedPreferences("userinfo", Context.MODE_PRIVATE);
+		Button buttonsignin = (Button) findViewById(R.id.buttonsignin);
 
 		buttonsignin.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v) {				
+			public void onClick(View v) {
+
+				EditText loginNameEditText = (EditText) findViewById(R.id.editloginname);
+				EditText loginPasswordEditText = (EditText) findViewById(R.id.editpassword);
 
 				String loginName = loginNameEditText.getText().toString();
 				String loginPassword = loginPasswordEditText.getText()
 						.toString();
 				if (loginName.matches("") || loginPassword.matches("")) {
 					Toast.makeText(getBaseContext(),
-							"User ID and password cannot be empty!", Toast.LENGTH_LONG)
+							"登入名稱 或 密碼不能空白!", Toast.LENGTH_LONG)
 							.show();
 				} else {
 
-					String UserID = "";
+					String UserName = "";
 					try {
 						String[] params = new String[3];
 		// e.g http://iems5722.ddns.net:5000/UserInfo/?route=getByUserID&key=111111&key2=123456
 						params[0] = "http";
-						params[1] = "/UserInfo";
+						params[1] = "/UserInfo/";
 						params[2] = "?route=getByUserID" + "&key=" + loginName
 								+ "&key2=" + loginPassword;
 						MyAsynTask MyGetLoginTask = new MyAsynTask(
 								LoginActivity.this);
 						outputJson = MyGetLoginTask.execute(params).get();
-						Log.d("login", outputJson.toString());
-						String UserName = outputJson.getString("UserName");
-						String UserOctopus = outputJson.getString("UserOctopus");
-						UserID = outputJson.getString("UserID");
+						UserName = outputJson.getString("UserName");
 						
 						
-						if (UserID.isEmpty()){
+						if (UserName.isEmpty()){
 							String errmsg=outputJson.getString("Message");
 							
 							
 							Toast.makeText(getBaseContext(),
-									"Login failed!("+errmsg+")", Toast.LENGTH_LONG)
+									"登入失敗!("+errmsg+")", Toast.LENGTH_LONG)
 									.show();
 							}
 						else{
 							Toast.makeText(getBaseContext(),
-									UserName+" Login successful!", Toast.LENGTH_LONG)
+									UserName+" 登入成功!", Toast.LENGTH_LONG)
 									.show();
-							
-							SharedPreferences.Editor editor = sharedPref.edit();
-							editor.putString("UserName", UserName);
-							editor.putString("UserOctopus", UserOctopus);
-							editor.commit();
-							Log.d("login", sharedPref.getString("UserName", ""));
-							
-							Intent successful = new Intent(LoginActivity.this, LoginSuccessful.class);
-							startActivity(successful);
+							finish();
+							//to intent to main activity
+							//Intent MainIntent = new Intent(MainActivity.class);
+							//startActivity(MainIntent);
 							
 						}						
 					} catch (InterruptedException e) {
@@ -117,17 +95,6 @@ public class LoginActivity extends Activity {
 
 			}
 
-		});
-		
-		register.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent regIntent = new Intent(mContext, Register.class);
-			    startActivity(regIntent);
-			}
-			
 		});
 
 	}
@@ -148,15 +115,7 @@ public class LoginActivity extends Activity {
 		int id = item.getItemId();
 		switch (id) {  
 	    case android.R.id.home:  
-	    	Intent upIntent = NavUtils.getParentActivityIntent(this);  
-	        if (NavUtils.shouldUpRecreateTask(this, upIntent)) {  
-	            TaskStackBuilder.create(this)  
-	                    .addNextIntentWithParentStack(upIntent)  
-	                    .startActivities();  
-	        } else {  
-	            upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
-	            NavUtils.navigateUpTo(this, upIntent);  
-	        }  
+	    	finish();
 	        return true;    
 	    case R.id.action_comment:
             // view comment

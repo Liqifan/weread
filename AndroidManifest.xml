@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="14"
         android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.INTERNET" >
@@ -60,20 +60,13 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.weread.MainActivity" />
         </activity>
         <activity
             android:name=".ViewComment"
             android:label="@string/title_activity_view_comment" >
-        </activity>
-        <activity
-            android:name=".LoginSuccessful"
-            android:label="@string/title_activity_login_successful"
-            android:parentActivityName=".MainActivity" >
-        </activity>
-        <activity
-            android:name=".Register"
-            android:parentActivityName=".MainActivity"
-            android:label="@string/title_activity_register" >
         </activity>
     </application>
 
