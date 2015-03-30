@@ -10,7 +10,6 @@ import org.json.JSONObject;
 
 // hello , this is a message from fan
 
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
